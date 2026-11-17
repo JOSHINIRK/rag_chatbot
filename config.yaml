@@ -1,0 +1,41 @@
+# ---------------------------------------------------------------------------
+# Central settings for the RAG chatbot. Every module reads its values from
+# here (through rag/config.py), so you can tune the system without editing code.
+# ---------------------------------------------------------------------------
+
+# INPUT folder: put HR documents in documents/hr and IT documents in documents/it.
+documents_dir: documents
+
+# Where the generated ChromaDB index and the file manifest are stored.
+index_dir: index
+
+# Name of the ChromaDB collection that holds the chunk vectors.
+collection_name: faq_chunks
+
+# OpenAI embedding model. It turns text into vectors for similarity search.
+# Changing it requires a full rebuild: python scripts/ingest.py --rebuild
+embedding_model: text-embedding-3-small
+
+# OpenAI chat model that writes the answers. Any chat model your account can
+# use works here (for example gpt-4.1-mini, gpt-4o-mini or a newer "mini" model).
+chat_model: gpt-4.1-mini
+
+# Lower temperature = more consistent, less creative answers (good for FAQs).
+# Some reasoning models reject this parameter; set it to null for those.
+temperature: 0.1
+
+# Upper limit on the length of one answer, in tokens.
+max_tokens: 1024
+
+# Chunking, measured in tokens (see rag/chunking.py for the full strategy).
+#   chunk_size:       maximum size of one chunk, including its heading prefix
+#   chunk_overlap:    trailing sentences repeated at the start of the next chunk
+#   min_chunk_tokens: sections smaller than this are merged with neighbouring
+#                     sections on the same topic, so no chunk is a context-free fragment
+# Changing these requires a full rebuild: python scripts/ingest.py --rebuild
+chunk_size: 350
+chunk_overlap: 50
+min_chunk_tokens: 100
+
+# How many of the most similar chunks are sent to the LLM for each question.
+top_k: 6

@@ -1,0 +1,17 @@
+openai>=1.40          # OpenAI API client: embeddings + chat answers
+chromadb>=0.5         # Local, persistent vector database
+tiktoken>=0.7         # Counts tokens so chunks match the embedding model's tokenizer
+streamlit>=1.38       # Chat web UI
+pypdf>=4.0            # Reads .pdf files
+python-docx>=1.1      # Reads .docx files
+beautifulsoup4>=4.12  # Reads .html files
+pyyaml>=6.0           # Reads config.yaml
+python-dotenv>=1.0    # Loads OPENAI_API_KEY from the .env file
+pytest>=8.0           # Runs the offline tests in tests/
+
+# Pinned for Windows Smart App Control: it blocked the DLLs of the newest
+# pydantic-core and pandas builds on this laptop, while these releases load fine.
+# The kubernetes pin keeps chromadb's (unused) kubernetes client compatible.
+pydantic==2.12.*
+pandas==2.3.*
+kubernetes<37

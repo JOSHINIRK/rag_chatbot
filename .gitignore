@@ -1,0 +1,21 @@
+# Secrets
+.env
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Generated data
+index/
+logs/
+eval/results/
+
+# Source documents are kept out of git so real policies are never committed by
+# accident. Only the folder layout (.gitkeep) is tracked.
+documents/**
+!documents/
+!documents/hr/
+!documents/it/
+!documents/**/.gitkeep
